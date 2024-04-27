@@ -1,4 +1,4 @@
-import { Card, CardHeader, CardBody, CardFooter } from "@nextui-org/react";
+import { Card } from "@nextui-org/react";
 
 const CardDolar = ({dolar}:{dolar:any}) => {
   return (
