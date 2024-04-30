@@ -48,9 +48,9 @@ const CardTasks = () => {
       }
     }
   return (
-    <Card className='min-w-[500px] min-h-[500px]'>
+    <Card className='max-h-min p-4'>
     <div className='flex flex-col justify-center items-center gap-4 mt-4'>
-        <h4 className='mt-4'>Tareas por hacer</h4>
+        <h4 className='font-bold text-lg'>Tareas por hacer</h4>
         <Button onPress={onOpen} className='max-w-32' color='primary'>Añadir tarea</Button>
     </div>
         <Modal isOpen={isOpen} onOpenChange={onOpenChange}>
@@ -75,7 +75,7 @@ const CardTasks = () => {
             <Button color="danger" variant="light" onPress={onClose}>
               Cerrar
             </Button>
-            <Button color="success" onPress={onClose} onClick={handleTaskSubmit}> 
+            <Button color="success" onPress={onClose} onPressStart={handleTaskSubmit}> 
               Añadir
             </Button>
           </ModalFooter>
@@ -86,8 +86,8 @@ const CardTasks = () => {
   {
     tasks?.map((ele,i)=>{
       return (
-        <div key={i} className='flex flex-row mt-8 justify-start pl-8'>  
-          <Checkbox onClick={() => handleTaskCheck(ele)} defaultSelected={ele?.done}><h4>{ele.desc}</h4></Checkbox>         
+        <div key={i} className='flex flex-row mt-8 justify-start text-wrap max-w-[250px] '>  
+          <Checkbox onClick={() => handleTaskCheck(ele)} defaultSelected={ele?.done}><h4 className='text-left'>{ele.desc}</h4></Checkbox>         
         </div>
       )
     })

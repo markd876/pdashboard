@@ -16,8 +16,8 @@ const CardEvents = () => {
         date.setDate(date.getDate() + 1);
         const weekdayplus = date.toLocaleString('es-ar', { weekday: 'long' });
         console.log(weekdayplus)
-        let { data: hoy } = await supabase.from('dia').select(`events (*)`).eq('desc', 'martes')
-        let { data: mna } = await supabase.from('dia').select(`events (*)`).eq('desc', 'miércoles')
+        let { data: hoy } = await supabase.from('dia').select(`events (*)`).eq('desc', weekday)
+        let { data: mna } = await supabase.from('dia').select(`events (*)`).eq('desc', weekdayplus)
         let { data: events } = await supabase
             .from('events').select(`diaId,desc, dia (*)`)
         console.log(events)
@@ -43,9 +43,9 @@ const CardEvents = () => {
     }
 
     return (
-        <Card className='min-w-[600px] mt-4 p-6'>
+        <Card className='mt-4 p-6'>
             <div className='flex justify-center mb-4'>
-                <Button className='max-w-[250px]' onPress={onOpen} color='primary'>Añadir</Button>
+                <Button className='' onPress={onOpen} color='primary'>Añadir</Button>
                 <Modal isOpen={isOpen} onOpenChange={onOpenChange}>
                     <ModalContent>
                         {(onClose) => (
@@ -72,7 +72,7 @@ const CardEvents = () => {
                                     <Button color="danger" variant="light" onPress={onClose}>
                                         Cerrar
                                     </Button>
-                                    <Button color="success" onPress={onClose} onClick={handleEventSubmit}>
+                                    <Button color="success" onPress={onClose} onPressStart={handleEventSubmit}>
                                         Añadir
                                     </Button>
                                 </ModalFooter>
@@ -81,28 +81,41 @@ const CardEvents = () => {
                     </ModalContent>
                 </Modal>
             </div>
-            <div className='flex flex-row justify-between gap-10'>
-                <div className='flex flex-col justify-items-center min-w-[250px] '>
-                    <h4>Hoy</h4>
-                    <div className='flex flex-col justify-center mt-4 min-w-[300px] max-w-[300px] text-nowrap text-left'>
-                        {todayTasks?.map((e, i) => {
-                            return (
-                                <h4 key={i}>{e.desc}</h4>
+            <div className='flex flex-col justify-between gap-10 xl:flex-row'>
+                <div className='flex flex-col justify-items-center xl:max-w-[300px] xl:min-w-[300px]'>
+                    <h4 className='text-lg font-bold'>Hoy</h4>
+                    <div className='flex flex-col justify-center mt-4 text-nowrap text-center'>
+                        {
+                            todayTasks != null && todayTasks?.length > 0 ? (
+                                todayTasks?.map((e, i) => {
+                                    return (
+                                        <h4 key={i}>{e.desc}</h4>
+                                    )
+                                })
+                            ) : (
+                                <h4>No hay eventos para hoy</h4>
                             )
-                        })}
+                        }
                     </div>
                 </div>
-                <div className='flex-grow max-w-[1px]'>
-                    <Divider orientation='vertical' className='flex-grow'/>
+                <div className=''>
+                    <Divider orientation={'vertical'} className='hidden xl:block'/>
+                    <Divider orientation={'horizontal'} className='block xl:hidden' />
                 </div>
-                <div className='flex flex-col justify-items-center min-w-[250px] '>
-                    <h4 className=''>Mañana</h4>
-                    <div className='flex flex-col justify-center mt-4 min-w-[300px] max-w-[300px] text-nowrap text-left'>
-                        {tomorrowTasks?.map((e, i) => {
-                            return (
-                                <h4 key={i}>{e.desc}</h4>
+                <div className='flex flex-col justify-items-center xl:max-w-[300px] xl:min-w-[300px]'>
+                    <h4 className='text-lg font-bold'>Mañana</h4>
+                    <div className='flex flex-col justify-center mt-4 text-nowrap text-center'>
+                    {
+                            tomorrowTasks != null && tomorrowTasks?.length > 0 ? (
+                                tomorrowTasks?.map((e, i) => {
+                                    return (
+                                        <h4 key={i}>{e.desc}</h4>
+                                    )
+                                })
+                            ) : (
+                                <h4>No hay eventos para mañana</h4>
                             )
-                        })}
+                        }
                     </div>
                 </div>
             </div>
