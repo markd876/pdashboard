@@ -48,8 +48,8 @@ const CardTasks = () => {
       }
     }
   return (
-    <Card className='max-h-min p-4'>
-    <div className='flex flex-col justify-center items-center gap-4 mt-4'>
+    <Card className='max-h-min p-4 mb-4'>
+    <div className='flex flex-col justify-center items-center gap-4 mt-4 min-w-[250px] '>
         <h4 className='font-bold text-lg'>Tareas por hacer</h4>
         <Button onPress={onOpen} className='max-w-32' color='primary'>Añadir tarea</Button>
     </div>
@@ -86,7 +86,7 @@ const CardTasks = () => {
   {
     tasks?.map((ele,i)=>{
       return (
-        <div key={i} className='flex flex-row mt-8 justify-start text-wrap max-w-[250px] '>  
+        <div key={i} className='flex flex-row mt-8 justify-start text-wrap max-w-[250px]'>  
           <Checkbox onClick={() => handleTaskCheck(ele)} defaultSelected={ele?.done}><h4 className='text-left'>{ele.desc}</h4></Checkbox>         
         </div>
       )
