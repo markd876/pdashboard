@@ -28,7 +28,7 @@ const CardTasks = () => {
         taskFreq
       }
       console.log(task)
-      let { data } = await supabase.from('tasks').insert([{desc: taskName, freq: taskFreq, recurring: !recurr}]).select()
+      await supabase.from('tasks').insert([{desc: taskName, freq: taskFreq, recurring: !recurr}]).select()
       getTasks()
     }
     const handleRecurr = () =>{
@@ -42,9 +42,9 @@ const CardTasks = () => {
     
     const handleTaskCheck = async (ele:any) => {
       if(ele.done){
-        let { data } = await supabase.from('tasks').update({done:false}).eq('id', ele.id).select()
+        await supabase.from('tasks').update({done:false}).eq('id', ele.id).select()
       } else{
-        let { data } = await supabase.from('tasks').update({done:true}).eq('id', ele.id).select()
+        await supabase.from('tasks').update({done:true}).eq('id', ele.id).select()
       }
     }
   return (
