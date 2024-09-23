@@ -1,6 +1,6 @@
 import React, { Key, useEffect, useState } from 'react'
 import supabase from '../utils/supabase'
-import { Card, CardHeader, CardBody, CardFooter, Divider, Button, Modal, ModalContent, ModalHeader, ModalBody, ModalFooter, useDisclosure, Select, SelectItem, Input, Checkbox } from "@nextui-org/react";
+import { Card, Divider, Button, Modal, ModalContent, ModalHeader, ModalBody, ModalFooter, useDisclosure, Select, SelectItem, Input, Checkbox } from "@nextui-org/react";
 
 const CardEvents = () => {
     const { isOpen, onOpen, onOpenChange } = useDisclosure();
@@ -30,7 +30,7 @@ const CardEvents = () => {
         getEvents()
     }, [])
     const handleEventSubmit = async () => {
-        let { data } = await supabase.from('events').insert([{ desc: eventName, diaId: eventDay, recurring: !recurr }]).select()
+        await supabase.from('events').insert([{ desc: eventName, diaId: eventDay, recurring: !recurr }]).select()
         getEvents()
     }
     /* viva peron */

@@ -1,5 +1,5 @@
-import React, { Key, useEffect, useState } from 'react'
-import { Card, Button, Modal, ModalContent, ModalHeader, ModalBody, ModalFooter, useDisclosure, Input, Select, SelectItem, Checkbox, Textarea, Divider  } from "@nextui-org/react";
+import React, {useEffect, useState } from 'react'
+import { Card, Button, Modal, ModalContent, ModalHeader, ModalBody, ModalFooter, useDisclosure, Input, Textarea, Divider  } from "@nextui-org/react";
 import supabase from '../utils/supabase'
 
 const CardNotes = () => {
@@ -43,7 +43,7 @@ const CardNotes = () => {
     }, [notes])
 
     const handleNoteDelete = async (id: Number | undefined) =>{
-        let { data } = await supabase.from('notes').delete().eq('id', id)
+        await supabase.from('notes').delete().eq('id', id)
         getNotes()
     }
 
@@ -53,7 +53,7 @@ const CardNotes = () => {
             noteData
         }
         console.log(note)
-        let { data } = await supabase.from('notes').insert([{ titulo: noteTitle, nota: noteData }]).select()
+        await supabase.from('notes').insert([{ titulo: noteTitle, nota: noteData }]).select()
         getNotes()
     }
     /*     const handleRecurr = () =>{
@@ -65,13 +65,13 @@ const CardNotes = () => {
           console.log(recurr)
       } */
 
-    const handleTaskCheck = async (ele: any) => {
+/*     const handleTaskCheck = async (ele: any) => {
         if (ele.done) {
-            let { data } = await supabase.from('tasks').update({ done: false }).eq('id', ele.id).select()
+            await supabase.from('tasks').update({ done: false }).eq('id', ele.id).select()
         } else {
-            let { data } = await supabase.from('tasks').update({ done: true }).eq('id', ele.id).select()
+            await supabase.from('tasks').update({ done: true }).eq('id', ele.id).select()
         }
-    }
+    } */
     return (
         <Card className='max-h-min p-4'>
             <div className='flex flex-col justify-center items-center gap-4 mt-4 min-w-[250px] '>
