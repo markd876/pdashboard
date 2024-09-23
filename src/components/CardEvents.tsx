@@ -33,6 +33,7 @@ const CardEvents = () => {
         let { data } = await supabase.from('events').insert([{ desc: eventName, diaId: eventDay, recurring: !recurr }]).select()
         getEvents()
     }
+    /* viva peron */
     const handleRecurr = () =>{
         if(recurr){
             setRecurr(false)
