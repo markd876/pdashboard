@@ -5,6 +5,7 @@ import { Card } from "@nextui-org/react";
 import supabase from './utils/supabase'
 import CardTasks from './components/CardTasks';
 import CardEvents from './components/CardEvents';
+import CardNotes from './components/CardNotes'
 import ContainerCryptos from './components/ContainerCryptos';
 
 function App() {
@@ -47,7 +48,10 @@ function App() {
           </Card>
           <CardEvents />
         </div>
-        <CardTasks />
+        <div className=''>          
+          <CardTasks />
+          <CardNotes/>
+        </div>
       </div>
     </React.Fragment>
   )
